@@ -1,0 +1,39 @@
+I changed the original tic-tac-toe code to fit the requirements of the two-phase Chorus Lappilli game
+
+In the original version, when a player clicked an empty square, X or O
+would be placed based on the player's turn. The game continued until 
+3 of the same symbols were placed in a row.
+
+For the new version, the structure was the same but only 6 symbols total (3 from each)
+were allowed to be placed. I then added logic to start a second phase of the game. During 
+this phase, players would take turns moving their pieces from one position to another 
+until one of them got 3 of their symbols in a row.
+
+In order to do this i added new helper functions that counted the pieces on the board for 
+each player so that it would know when the first phase was complete.
+
+I also added a piece that would track the state of the game called selectedSquare. This was 
+necessary because the program would need to know which X or O that the player wanted to move
+as well as know where they wanted to place that piece. If they clicked a square that had no 
+value in it, then the program would know that no piece was selected. 
+
+The behavior handler was changed into two different handlers rather than one for this game. In
+the original, the handler would always just check to see if it could place a symbol in the clicked
+square. For the updated game it needed a placement handler as well as a movemenet handler for the 
+second added function of the game. This movement handler basically checks to see if the user is on 
+the first click or the second click of the move in order to know if they are selecting a piece to 
+move or a block to move a piece to.
+
+To validate the move that the player is trying to make, I added an adjacency-checking function. 
+This version of tic-tac-toe requires the player to move one of their previously placed pieces to 
+an adjacent and empty square. To do this, I compared the index of the piece that they picked to move
+with the square that they are trying to move it to. This means that there is also some logic in order 
+to determine if what they are trying to do is invalid.
+
+The original calculateWinner function was mostly the same because the means in winning the game 
+stayed the same. 
+
+I also updated the status message logic to add in the different steps in the game like selecting a 
+piece to move and selecting a position to move it to.
+
+Lastly, I changing the square component so it can 

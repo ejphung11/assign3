@@ -1,0 +1,53 @@
+1) Getting the assignment opened from github
+    - fork into my account
+    - git clone
+    - "code ." opens in VScode
+2) Tic-tac-toe implementation
+    - ./helper init installs the dependencies
+    - ./helper dev runs the app in the browser
+
+3) Implemented the square component 
+    - used props so that the component could be reused for every tile on the board
+
+4) Implemented the board component 
+    - Structured the board manually into three board row containers
+    - mapped the containers to a fixed index in an array
+    - For each square, i passed squares[index] as the displayed value and connected 
+    it to the board position
+    - this gives a direct relationship between board position and the array of the tiles
+5) moveCount variable to keep track of the state variable
+    - uses useState(0)
+    - utilizes modulor in order to figure out who's turn it is 
+    - improves redundancy
+6) Implemented handleBoarldClick 
+    - is a separate helper function outside of the Board component
+    - reduce nesting and make the logic easier to test
+
+After updating the board, I incremented the move counter with setMoveCount(moveCount + 1)
+
+7) Winning combinations
+    - For each winning combination, I checked that the first position was not null
+      and that all three indexed positions help the same symbol
+    - If match was found, the function returned that symbol 
+
+Tested the program incrementally after each major change.
+Initially, the board rendered but only X was appearing.
+I traced the issue to the fact that moveCount was not being updated, which
+meant xIsNext always evaluated to true.
+After adding the move-count update inside handleBoardClick, the alternating
+turn logic worked correctly.
+
+Edited the CSS after the functionality was working.
+I increased the square width, height, line-height, and font-size to make the
+board easier to see and interact with.
+I also increased the font size for the status text so the current game state
+would be more readable.
+
+Performed final verification in the browser.
+Confirmed that the board renders correctly, moves alternate between X and O,
+winning combinations are detected, the winner message appears correctly, and
+additional moves are blocked once a winner has been found.
+
+Website would not run properly if ./helper dev was not ready and running
+Wesbite would show errors messages if there were any errors within the code 
+itself.
