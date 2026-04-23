@@ -1,42 +1,48 @@
-1) Getting the assignment opened from GitHub
-   - Forked the provided repository into my own GitHub account
-   - Cloned the forked repository onto my local machine
-   - Used "code ." to open the project in VS Code
+1) Getting the assignment opened from github
+    - fork into my account
+    - git clone
+    - "code ." opens in VScode
+2) Tic-tac-toe implementation
+    - ./helper init installs the dependencies
+    - ./helper dev runs the app in the browser
 
-2) Running the starter tic-tac-toe code
-   - Ran ./helper init to install dependencies
-   - Ran ./helper dev to start the development server
-   - Opened the app in the browser and confirmed the provided tic-tac-toe code worked before modifying it
+3) Square component 
+    - used props so that the component could be reused for every tile on the board
 
-3) Understanding the provided code
-   - Examined how the code was split into Square, Board, Game, and calculateWinner
-   - Traced how props were passed down and how the board was represented as a 1D array of length 9
-   - Looked at how currentMove % 2 === 0 was used to determine the current player
+4) Board component 
+    - Structured the board manually into three board row containers
+    - mapped the containers to a fixed index in an array
+    - For each square, i passes squares[index] as the displayed value and connected 
+    it to the board position
+    - this gives a direct relationship between board position and the array of the tiles
+5) moveCount variable to keep track of the state variable
+    - uses useState(0)
+    - utilizes modulor in order to figure out who's turn it is 
+    - improves redundancy
+6) handleBoarldClick 
+    - is a separate helper function outside of the Board component
+    - reduce nesting and make the logic easier to test
 
-4) Working with the Square and Board components
-   - Kept the reusable Square structure from the starter code
-   - Studied how Board mapped each board position to a fixed array index
-   - Used that structure as the basis for later changes
+After updating the board, move counter is incremented -> setMoveCount(moveCount + 1)
 
-5) Understanding and modifying click logic
-   - Looked at how the original handleClick function rejected occupied squares, copied the board with squares.slice(), and placed the current player’s symbol
-   - Used that logic as the starting point for later modifications
-   - In some versions, separated the click logic into helper functions to reduce nesting and make it easier to test
+7) Winning combinations
+    - For each winning combination, checks that the first position was not null
+      and that all three indexed positions help the same symbol
+    - If match was found, the function returned that symbol 
 
-6) Understanding state and winner checking
-   - Traced how history and currentMove were used to manage board states
-   - Reviewed how calculateWinner checked the predefined row, column, and diagonal combinations
-   - Kept the same winner-checking structure since Chorus Lapilli still uses three in a row
+Tested the program incrementally after each major change.
 
-7) Testing and debugging
-   - Tested the program after each major change
-   - At one point only X was appearing, which I traced to the move-count / turn logic not updating correctly
-   - After fixing that, turns alternated correctly and the game behaved as expected
+Edited the CSS after the functionality was working.
+I increased the square width, height, line-height, and font-size to make the
+board easier to see and interact with.
+I also increased the font size for the status text so the current game state
+would be more readable.
 
-8) CSS and final verification
-   - Increased square size and status text size to improve readability
-   - Verified that the board rendered correctly, turns alternated properly, winners were detected, and extra moves were blocked after a win
+Performed final verification in the browser.
+Confirmed that the board renders correctly, moves alternate between X and O,
+winning combinations are detected, the winner message appears correctly, and
+additional moves are blocked once a winner has been found.
 
-9) General observations
-   - The app would not run unless ./helper dev was active and fully started
-   - Browser and terminal error messages helped identify syntax and logic errors during development
+Website would not run properly if ./helper dev was not ready and running
+Wesbite would show errors messages if there were any errors within the code 
+itself.
