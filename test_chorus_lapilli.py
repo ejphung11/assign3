@@ -176,29 +176,48 @@ class TestChorusLapilli(unittest.TestCase):
         after = [tile.text.strip() for tile in tiles]
         self.assertEqual(before, after)
 
-    def test_non_adjacent_move_is_rejected(self):
-        '''Check that a non-adjacent move is rejected in movement phase.'''
-        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
 
-        # Reach movement phase without creating a winner
-        tiles[0].click()  # X
-        tiles[1].click()  # O
-        tiles[3].click()  # X
-        tiles[4].click()  # O
-        tiles[6].click()  # X
-        tiles[8].click()  # O
+def test_non_adjacent_move_is_rejected(self):
+    '''Check that a non-adjacent move is rejected in movement phase'''
+    tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
 
-        # Now it is X's turn in movement phase.
-        # Try to move X from tile 0 to tile 5, which is not adjacent.
-        tiles[0].click()
-        tiles[5].click()
+    # Reach movement phase without creating a winner
+    tiles[0].click()  # X
+    tiles[1].click()  # O
+    tiles[2].click()  # X
+    tiles[4].click()  # O
+    tiles[3].click()  # X
+    tiles[8].click()  # O
 
-        # The move should be rejected, so the board should stay the same.
-        self.assertTileIs(tiles[0], self.SYMBOL_X)
-        self.assertTileIs(tiles[3], self.SYMBOL_X)
-        self.assertTileIs(tiles[6], self.SYMBOL_X)
-        self.assertTileIs(tiles[5], self.SYMBOL_BLANK)
+    # Now it is X's turn in movement phase.
+    # Try to move X from tile 0 to tile 7, which is not adjacent.
+    tiles[0].click()
+    tiles[7].click()
 
+    # The move should be rejected, so the board should stay the same.
+    self.assertTileIs(tiles[0], self.SYMBOL_X)
+    self.assertTileIs(tiles[7], self.SYMBOL_BLANK)
+
+def test_adjacent_move_updates_board(self):
+    #Check that a valid adjacent move works in movement phase
+    tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+
+    # Reach movement phase without creating a winner
+    tiles[0].click()  # X
+    tiles[1].click()  # O
+    tiles[2].click()  # X
+    tiles[4].click()  # O
+    tiles[3].click()  # X
+    tiles[8].click()  # O
+
+    # Now it is X's turn in movement phase.
+    # Move X from tile 3 to tile 6, which is adjacent and empty.
+    tiles[3].click()
+    tiles[6].click()
+
+    # Old spot should be blank, new spot should contain X.
+    self.assertTileIs(tiles[3], self.SYMBOL_BLANK)
+    self.assertTileIs(tiles[6], self.SYMBOL_X)
 
 
 
